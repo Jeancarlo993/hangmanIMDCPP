@@ -1,0 +1,18 @@
+
+
+  [1] You need to guess the secret word or phrase the game has chosen
+      by suggesting letters.
+  [2] We will display a row of dashes, representing each letter of the
+      the secret word/phrase you're trying to guess.
+  [3] Each correct guess earns you 1 point.
+  [4] Each wrong guess you loose 1 point and I draw on component of a
+      hanged stick figure (the hangman!)
+  [5] If you wrong guess 6 times you loose the challenge
+  [6] If you can guess the secret word/phrase before the hangman is
+      complete you add 2 extra points to your overall score.
+  [7] After a guessing round (challenge) is complete you may try another
+      secret word/phrase or quit the game.
+
+=--------------------------------------------------------------------=
+
+
