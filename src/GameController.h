@@ -2,7 +2,7 @@
 
 class GameController{
   private:
-    int m_option;				      //! variável que recebe opção
+    char m_option;				    //! variável que recebe opção
     Player player1;           //! jogador
  
   public:
@@ -14,5 +14,6 @@ class GameController{
     void m_tela_inicial();	  //! Exibe a tela inicial
     void m_option_in();       //! Método que processa a entrada
     void eval_option();       //! Avalia a opção do Game controller e executa um dos métodos
-    void m_quit();              //! muda o estado do jogo pro 0
+    void m_quit();            //! muda o estado do jogo pro 0
+    
 };

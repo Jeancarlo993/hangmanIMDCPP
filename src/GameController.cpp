@@ -4,9 +4,13 @@
 #include "GameController.h"
 #include "dice.h"
 #include "hangman.h"
+
+
 #define YEL "\e[0;33m"
 #define RED "\e[0;31m"
 #define BLU "\e[0;34m"
+#define GRE "\e[0;33m"
+
 
 
 using namespace std;
@@ -19,11 +23,13 @@ void GameController::m_tela_inicial(){
   std::cout<<"-------------------------------------------------------------"<<std::endl;
   std::cout << "Please, enter your name > ";
   player1.m_set_name();
-  estado = 1; // pronto para entrar no game loop
+  estado = 1;                                /// pronto para entrar no game loop
 };
 
 /// entrada principal das opções
 void GameController::m_option_in(){
+  std::cout<<std::endl;
+   
   std::cout<<RED<< "=-------[ Main Menu ]-------=" << std::endl;
   std::cout << "Please choose an option: \n";
   std::cout << " 1 - Start a new challenge.\n";
@@ -32,29 +38,44 @@ void GameController::m_option_in(){
   std::cout << " 4 - Quit the game.\n";
   std::cout << ">>> ";
   std::cin.clear();
+   
   std::cin>>m_option;
 };
 ///
 void GameController::eval_option(){
- /// Inicia um novo desafio
-  if(m_option==1){
-    // todo o jogo tem que ir pra um novo método que vai precisar um novo loop
-    estado = 2; // estado em que o jogo foi inciado
-    Hangman hang;
-    hang.find_Out();
-  }
-  /// Mostra as regras do jogo
-  else if(m_option==2){
-    system("clear");
-    m_show_rules();
-  }
-  /// Mostra o scoreboard
-  else if(m_option==3){
-    
-  }
-  /// sai do jogo1
-  else if(m_option==4){
-    m_quit();
+  Hangman hang;
+  switch(m_option){
+    case '1':
+      estado = 2;                           /// estado em que o jogo foi inciado
+      hang.make_word_line();
+      system("clear");
+      while(estado ==2){
+        hang.print();                       ///imprime a forca com o life
+        estado = hang.eval_hang_status();   ///avalia o estado do jogo
+        if(estado==1){break;}               ///se estado mudou encerra o laço 
+        hang.wrong_letter();                ///imprime as letras erradas
+        hang.print_word();                  ///impresse como está o palpite
+        hang.point_now();
+        hang.guess_in();                    ///recebe novo palpite
+
+      }
+      player1.m_set_total_points(hang.point_now()); ///armazena a pontuação da partida
+      break;
+    case '2':
+      system("clear");
+      m_show_rules();
+      break;
+    case '3':
+      player1.print_line_up();
+      player1.print_medium_line();
+      player1.print_score();
+      player1.print_line_down();
+      break;
+    case '4':
+      m_quit();
+      break;
+    default:
+      std::cout << "invalid option\n";
   }
 };
 /// Regras do jogo
@@ -71,9 +92,15 @@ void GameController::m_show_rules(){
     }
     rules.close();
   }
-  // falta implementar que ele só saia dessa tela depois do enter
 };
+
 /// quit 
 void GameController::m_quit(){
+//limpa a tela
+  system("clear");
   estado = 0;
+
+ std::cout<<" =-------[ Farewell ]-------="<<std::endl;
+
+ std::cout<<"Thanks for playing. See you next time!"<<std::endl;
 };

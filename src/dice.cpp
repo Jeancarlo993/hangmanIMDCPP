@@ -1,7 +1,7 @@
 #include <cstdlib>
 #include <ctime>
-
 #include "dice.h"
+
 /// Por padrão, o dado tem 6 faces
 Dice::Dice(){
 	faces = 6;
